@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { getThemeStyles } from 'map-import'
-import { MdMap, MdLayers, MdPlace, MdNavigation, MdTerrain, MdSatellite, MdLocationCity, MdDirections } from 'react-icons/md'
+import { MdApps, MdMap, MdLayers, MdPlace, MdNavigation, MdTerrain, MdSatellite, MdLocationCity, MdDirections } from 'react-icons/md'
+import CenterMenuBar from './CenterMenuBar'
 
 const BUTTON_SIZE = 40
 const BUTTON_GAP = 8
@@ -13,6 +14,7 @@ const CenterMenu = () => {
   const { mapTheme } = useSelector((state) => state.map)
   const themeStyles = getThemeStyles(mapTheme)
   const [hoveredButton, setHoveredButton] = useState(null)
+  const [isMenuBarVisible, setIsMenuBarVisible] = useState(false)
 
   // Menü konteyner stili
   const menuContainerStyle = {
@@ -53,6 +55,15 @@ const CenterMenu = () => {
       boxShadow: 'none'
     };
 
+    // Menü butonu aktifse farklı stil
+    if (buttonId === 'menu' && isMenuBarVisible) {
+      return {
+        ...baseStyle,
+        backgroundColor: themeStyles.buttonHoverStyle.backgroundColor || '#f0f0f0',
+        color: themeStyles.buttonHoverStyle.color || '#0078d4'
+      };
+    }
+
     // Hover durumunda stil
     if (hoveredButton === buttonId) {
       return {
@@ -65,33 +76,45 @@ const CenterMenu = () => {
     return baseStyle;
   }
 
-  // Buton ikonları ve işlevleri - 8 buton
+  // Menü butonuna tıklandığında
+  const handleMenuClick = () => {
+    setIsMenuBarVisible(!isMenuBarVisible);
+  }
+
+  // Buton ikonları ve işlevleri - 8 buton, en soldaki 9 noktalı menü
   const buttons = [
+    { id: 'menu', icon: MdApps, title: 'Menü', onClick: handleMenuClick },
     { id: 'map', icon: MdMap, title: 'Harita Tipi', onClick: () => console.log('Harita Tipi') },
     { id: 'layers', icon: MdLayers, title: 'Katmanlar', onClick: () => console.log('Katmanlar') },
     { id: 'place', icon: MdPlace, title: 'Yer İşaretleri', onClick: () => console.log('Yer İşaretleri') },
     { id: 'navigation', icon: MdNavigation, title: 'Navigasyon', onClick: () => console.log('Navigasyon') },
     { id: 'terrain', icon: MdTerrain, title: 'Arazi', onClick: () => console.log('Arazi') },
     { id: 'satellite', icon: MdSatellite, title: 'Uydu', onClick: () => console.log('Uydu') },
-    { id: 'city', icon: MdLocationCity, title: 'Şehirler', onClick: () => console.log('Şehirler') },
-    { id: 'directions', icon: MdDirections, title: 'Yol Tarifi', onClick: () => console.log('Yol Tarifi') }
+    { id: 'city', icon: MdLocationCity, title: 'Şehirler', onClick: () => console.log('Şehirler') }
   ]
 
   return (
-    <div style={menuContainerStyle}>
-      {buttons.slice(0, 8).map(button => (
-        <button
-          key={button.id}
-          style={getButtonStyle(button.id)}
-          onClick={button.onClick}
-          onMouseEnter={() => setHoveredButton(button.id)}
-          onMouseLeave={() => setHoveredButton(null)}
-          title={button.title}
-        >
-          <button.icon size={22} />
-        </button>
-      ))}
-    </div>
+    <>
+      <CenterMenuBar 
+        isVisible={isMenuBarVisible} 
+        onClose={() => setIsMenuBarVisible(false)} 
+        width={`${CONTAINER_WIDTH}px`}
+      />
+      <div style={menuContainerStyle}>
+        {buttons.slice(0, 8).map(button => (
+          <button
+            key={button.id}
+            style={getButtonStyle(button.id)}
+            onClick={button.onClick}
+            onMouseEnter={() => setHoveredButton(button.id)}
+            onMouseLeave={() => setHoveredButton(null)}
+            title={button.title}
+          >
+            <button.icon size={22} />
+          </button>
+        ))}
+      </div>
+    </>
   )
 }
 

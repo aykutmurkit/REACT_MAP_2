@@ -26,6 +26,7 @@ export { default as FpsButton } from './components/FpsButton'
 export { default as ScreenshotButton } from './components/ScreenshotButton'
 export { default as MapSidebar } from './components/MapSidebar'
 export { default as CenterMenu } from './components/CenterMenu'
+export { default as CenterMenuBar } from './components/CenterMenuBar'
 
 // Map Utils
 export * from './utils/mapUtils'

@@ -1,0 +1,312 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+For maps you will use fluent desing without map you will use core uı design 
+/* ===================================================
+   Fluent Design CSS Toolkit — Detailed Reference
+   =================================================== */
+
+/* 0. RESET & BOX-SIZING */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* 1. DESIGN TOKENS (CSS VARIABLES) */
+:root {
+  /* — Spacing Scale — */
+  --fd-space-xxs: 2px;
+  --fd-space-xs: 4px;
+  --fd-space-sm: 8px;
+  --fd-space-md: 16px;
+  --fd-space-lg: 24px;
+  --fd-space-xl: 32px;
+
+  /* — Typography — */
+  --fd-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --fd-font-size-base: 14px;
+  --fd-font-size-sm: 12px;
+  --fd-font-size-md: 16px;
+  --fd-font-size-lg: 18px;
+  --fd-font-size-xl: 20px;
+  --fd-font-weight-regular: 400;
+  --fd-font-weight-semibold: 600;
+  --fd-font-weight-bold: 700;
+  --fd-line-height: 1.5;
+
+  /* — Colors — */
+  --fd-text-primary: #212121;
+  --fd-text-secondary: #666666;
+  --fd-text-on-accent: #ffffff;
+  --fd-bg-light: rgba(255,255,255,0.6);
+  --fd-bg-dark: rgba(32,32,32,0.6);
+  --fd-bg-base: #ffffff;
+  --fd-border: rgba(0,0,0,0.12);
+  --fd-accent: #0078D4;
+  --fd-accent-hover: #106EBE;
+  --fd-success: #107C10;
+  --fd-warning: #FFB900;
+  --fd-error:   #D13438;
+
+  /* — Acrylic Opacity Levels — */
+  --fd-acrylic-100: rgba(255,255,255,1);
+  --fd-acrylic-80:  rgba(255,255,255,0.8);
+  --fd-acrylic-60:  rgba(255,255,255,0.6);
+  --fd-acrylic-40:  rgba(255,255,255,0.4);
+  --fd-acrylic-20:  rgba(255,255,255,0.2);
+  --fd-acrylic-dark-60: rgba(32,32,32,0.6);
+
+  /* — Shadows (Elevations) — */
+  --fd-shadow-1: 0 1px 3px rgba(0,0,0,0.12);
+  --fd-shadow-2: 0 4px 8px rgba(0,0,0,0.16);
+  --fd-shadow-3: 0 8px 16px rgba(0,0,0,0.2);
+  --fd-shadow-4: 0 16px 24px rgba(0,0,0,0.24);
+
+  /* — Motion & Timing — */
+  --fd-duration-fast: 150ms;
+  --fd-duration-medium: 300ms;
+  --fd-duration-slow: 500ms;
+  --fd-ease: ease-in-out;
+
+  /* — Blur Radius for Acrylic — */
+  --fd-blur: 30px;
+}
+
+/* 2. GLOBAL TYPOGRAPHY & UTILITIES */
+body {
+  font-family: var(--fd-font-family);
+  font-size: var(--fd-font-size-base);
+  line-height: var(--fd-line-height);
+  color: var(--fd-text-primary);
+  background-color: var(--fd-bg-base);
+}
+
+/* Headings */
+.h1 { font-size: var(--fd-font-size-xl); font-weight: var(--fd-font-weight-bold); margin: var(--fd-space-md) 0 var(--fd-space-sm); }
+.h2 { font-size: var(--fd-font-size-lg); font-weight: var(--fd-font-weight-semibold); margin: var(--fd-space-md) 0 var(--fd-space-sm); }
+
+/* Paragraph & Mute */
+.p { margin-bottom: var(--fd-space-md); }
+.p-muted { color: var(--fd-text-secondary); }
+
+/* Spacing utilities */
+.m-t-1 { margin-top: var(--fd-space-sm); }
+.m-b-1 { margin-bottom: var(--fd-space-sm); }
+.p-1   { padding: var(--fd-space-sm); }
+.p-2   { padding: var(--fd-space-md); }
+
+/* Grid helper */
+.grid { display: grid; }
+.gap-sm { gap: var(--fd-space-sm); }
+.gap-md { gap: var(--fd-space-md); }
+
+/* Text align */
+.text-center { text-align: center; }
+
+/* 3. ACRYLIC MIXIN */
+.fluent-acrylic {
+  background-color: var(--fd-bg-light);
+  backdrop-filter: blur(var(--fd-blur));
+  -webkit-backdrop-filter: blur(var(--fd-blur));
+  border: 1px solid var(--fd-border);
+  border-radius: 4px;
+  box-shadow: var(--fd-shadow-1);
+  transition: background-color var(--fd-duration-medium) var(--fd-ease);
+}
+
+/* 4. CONTAINERS / CARD BASE */
+.fluent-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+  gap: var(--fd-space-md);
+  padding: var(--fd-space-md);
+}
+
+.card {
+  background-color: var(--fd-bg-light);
+  color: var(--fd-text-primary);
+  border-radius: 6px;
+  box-shadow: var(--fd-shadow-1);
+  padding: var(--fd-space-md);
+  transition: box-shadow var(--fd-duration-medium) var(--fd-ease);
+}
+.card:hover { box-shadow: var(--fd-shadow-2); }
+
+/* 5. CARD VARIANTS */
+.card.thick-dark {
+  background-color: #1f1f1f;
+  color: #f3f2f1;
+  box-shadow: var(--fd-shadow-3);
+}
+.card.thin-dark {
+  background-color: var(--fd-acrylic-dark-60);
+  color: #f3f2f1;
+}
+.card.thin-light {
+  background-color: var(--fd-acrylic-80);
+  color: var(--fd-text-primary);
+}
+.card.thin-colored-light {
+  background-color: rgba(0,120,212,0.15);
+  color: var(--fd-text-primary);
+}
+
+/* 6. BUTTONS */
+.fluent-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fd-font-size-base);
+  font-weight: var(--fd-font-weight-semibold);
+  padding: var(--fd-space-sm) var(--fd-space-md);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+  transition: background-color var(--fd-duration-fast) var(--fd-ease), box-shadow var(--fd-duration-fast) var(--fd-ease);
+}
+
+.fluent-btn.primary {
+  background-color: var(--fd-accent);
+  color: var(--fd-text-on-accent);
+}
+.fluent-btn.primary:hover {
+  background-color: var(--fd-accent-hover);
+  box-shadow: var(--fd-shadow-2);
+}
+
+.fluent-btn.secondary {
+  background-color: transparent;
+  border: 1px solid var(--fd-accent);
+  color: var(--fd-accent);
+}
+.fluent-btn.secondary:hover {
+  background-color: rgba(0,120,212,0.08);
+}
+
+/* Reveal (ripple) */
+.fluent-btn::after {
+  content: '';
+  position: absolute;
+  width: 0; height: 0;
+  background: rgba(255,255,255,0.3);
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  transition: width var(--fd-duration-medium) ease, height var(--fd-duration-medium) ease;
+}
+.fluent-btn:active::after {
+  width: 200%; height: 200%;
+  transition: 0s;
+}
+
+/* 7. DROPDOWN */
+.fluent-dropdown {
+  position: relative;
+  display: inline-block;
+}
+.fluent-dropdown .trigger {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: var(--fd-space-sm) var(--fd-space-md);
+  border: 1px solid var(--fd-border);
+  border-radius: 2px;
+  background: #fff;
+  cursor: pointer;
+}
+.fluent-dropdown .menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + var(--fd-space-xs)); left: 0;
+  min-width: 160px;
+  background: var(--fd-bg-light);
+  backdrop-filter: blur(var(--fd-blur));
+  border: 1px solid var(--fd-border);
+  border-radius: 4px;
+  box-shadow: var(--fd-shadow-2);
+  padding: var(--fd-space-sm) 0;
+  z-index: 10;
+}
+.fluent-dropdown.open .menu {
+  display: block;
+}
+.fluent-dropdown .menu-item {
+  padding: var(--fd-space-sm) var(--fd-space-md);
+  white-space: nowrap;
+  transition: background-color var(--fd-duration-fast) var(--fd-ease);
+}
+.fluent-dropdown .menu-item:hover {
+  background-color: rgba(0,0,0,0.04);
+}
+
+/* 8. SIDEBAR */
+.fluent-sidebar {
+  width: 240px;
+  background-color: rgba(255,255,255,0.7);
+  backdrop-filter: blur(20px);
+  border-right: 1px solid var(--fd-border);
+  display: flex;
+  flex-direction: column;
+  padding: var(--fd-space-md) 0;
+}
+.fluent-sidebar .nav-item {
+  padding: var(--fd-space-sm) var(--fd-space-md);
+  font-size: var(--fd-font-size-base);
+  color: var(--fd-text-primary);
+  text-decoration: none;
+  transition: background-color var(--fd-duration-fast) var(--fd-ease);
+}
+.fluent-sidebar .nav-item:hover,
+.fluent-sidebar .nav-item.active {
+  background-color: rgba(0,0,0,0.08);
+}
+
+/* 9. RESPONSIVE ADJUSTMENTS */
+@media (max-width: 768px) {
+  .fluent-container {
+    grid-template-columns: 1fr !important;
+  }
+  .fluent-sidebar {
+    width: 60px;
+  }
+  .fluent-sidebar .nav-item {
+    text-align: center;
+    padding: var(--fd-space-sm) 0;
+  }
+}
+
+/* 10. EXAMPLE USAGE */
+/*
+<div class="fluent-container">
+  <div class="card thick-dark">
+    <h3 class="h2">Thick Dark</h3>
+    <p class="p-muted">Deep background.</p>
+    <button class="fluent-btn primary">OK</button>
+  </div>
+  <div class="card thin-dark">
+    <h3 class="h2">Thin Dark</h3>
+    <p class="p-muted">Acrylic overlay.</p>
+    <button class="fluent-btn secondary">More</button>
+  </div>
+  <div class="card thin-light">
+    <h3 class="h2">Thin Light</h3>
+    <p class="p-muted">Light acrylic.</p>
+    <button class="fluent-btn primary">Go</button>
+  </div>
+  <div class="card thin-colored-light">
+    <h3 class="h2">Colored Light</h3>
+    <p class="p-muted">Accent tint.</p>
+    <button class="fluent-btn secondary">View</button>
+  </div>
+</div>
+*/
+
+
+
+there ise sample of css you use this for imaginastion to convert bootstrap button to this.
+
+

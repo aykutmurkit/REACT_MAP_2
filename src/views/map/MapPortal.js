@@ -1,8 +1,16 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleMapFullscreen, setRealFullscreen } from '../../redux/slices/mapSlice'
-import { MapContainer, MapControls, MapSidebar, CenterMenu } from './imports'
+import { 
+  MapContainer, 
+  MapControls, 
+  MapSidebar, 
+  CenterMenu, 
+  MapLogoOverlay, 
+  MapIntroOverlay,
+  MapOutroOverlay 
+} from './imports'
 import { portalOverlayStyle, mapContainerStyle } from './styles/mapStyles'
 import { 
   isFullscreenSupported, 
@@ -16,17 +24,38 @@ const MapPortal = () => {
   const dispatch = useDispatch()
   const { isMapFullscreen, isRealFullscreen } = useSelector(state => state.map)
   const fullscreenContainerRef = useRef(null)
+  const [showIntro, setShowIntro] = useState(true)
+  const [showOutro, setShowOutro] = useState(false)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [isIntroVisible, setIsIntroVisible] = useState(true)
 
   const handleClose = async () => {
     try {
-      if (isCurrentlyFullscreen()) {
-        await exitFullscreen()
-      }
+      // Outro animasyonunu başlat
+      setShowOutro(true)
+      
+      // Animasyon tamamlandıktan sonra fullscreen'den çık ve harita modunu kapat
+      setTimeout(async () => {
+        if (isCurrentlyFullscreen()) {
+          await exitFullscreen()
+        }
+        dispatch(toggleMapFullscreen())
+      }, 1000)
     } catch (error) {
       console.warn('Fullscreen çıkış hatası:', error)
+      dispatch(toggleMapFullscreen())
     }
-    dispatch(toggleMapFullscreen())
   }
+
+  // handleClose fonksiyonunu global olarak erişilebilir yap
+  useEffect(() => {
+    window.mapPortal = {
+      handleClose
+    }
+    return () => {
+      delete window.mapPortal
+    }
+  }, [])
 
   const handleOverlayClick = (e) => {
     // Sadece overlay'e tıklandığında kapat, harita alanına tıklandığında kapatma
@@ -40,6 +69,14 @@ const MapPortal = () => {
     if (e.key === 'Escape') {
       handleClose()
     }
+  }
+
+  const handleIntroComplete = () => {
+    setShowIntro(false)
+  }
+
+  const handleOutroComplete = () => {
+    setShowOutro(false)
   }
 
   useEffect(() => {
@@ -76,14 +113,22 @@ const MapPortal = () => {
       const isFullscreen = isCurrentlyFullscreen()
       dispatch(setRealFullscreen(isFullscreen))
       
-      // Eğer fullscreen dışına çıkıldıysa harita modunu da kapat
+      // Eğer fullscreen dışına çıkıldıysa (F11 veya ESC ile)
       if (!isFullscreen && isMapFullscreen) {
-        dispatch(toggleMapFullscreen())
+        handleClose()
       }
     })
 
     return cleanup
   }, [dispatch, isMapFullscreen])
+
+  // MapPortal açıldığında intro'yu sıfırla
+  useEffect(() => {
+    if (isMapFullscreen) {
+      setShowIntro(true)
+      setShowOutro(false)
+    }
+  }, [isMapFullscreen])
 
   if (!isMapFullscreen) {
     return null
@@ -94,6 +139,19 @@ const MapPortal = () => {
     style: portalOverlayStyle,
     onClick: handleOverlayClick
   }, [
+    // Intro overlay
+    showIntro && React.createElement(MapIntroOverlay, {
+      key: 'intro-overlay',
+      onIntroComplete: handleIntroComplete
+    }),
+    
+    // Outro overlay
+    showOutro && React.createElement(MapOutroOverlay, {
+      key: 'outro-overlay',
+      visible: showOutro,
+      onOutroComplete: handleOutroComplete
+    }),
+    
     // Harita kapsayıcısı
     React.createElement('div', {
       key: 'map-container',
@@ -106,7 +164,8 @@ const MapPortal = () => {
       
       // Harita kontrolleri
       React.createElement(MapControls, { key: 'controls' }),
-      React.createElement(CenterMenu, { key: 'center-menu' })
+      React.createElement(CenterMenu, { key: 'center-menu' }),
+      React.createElement(MapLogoOverlay, { key: 'map-logo-overlay' })
     ])
   ])
 

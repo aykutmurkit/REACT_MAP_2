@@ -4,6 +4,7 @@ import { MdFullscreen, MdFullscreenExit } from 'react-icons/md'
 import { toggleMapFullscreen } from '../../../redux/slices/mapSlice'
 import { getThemeStyles } from '../utils/themeUtils'
 import { getControlPropsForDevice } from '../utils/mapUtils'
+import { isCurrentlyFullscreen, exitFullscreen } from '../utils/mapUtils'
 
 const FullscreenButton = ({ isVisible = true }) => {
   const dispatch = useDispatch()
@@ -17,8 +18,22 @@ const FullscreenButton = ({ isVisible = true }) => {
     return null
   }
 
-  const handleClick = () => {
-    dispatch(toggleMapFullscreen())
+  const handleClick = async () => {
+    if (isMapFullscreen) {
+      // Fullscreen'den çıkarken animasyonu başlat
+      if (window.mapPortal && window.mapPortal.handleClose) {
+        window.mapPortal.handleClose()
+      } else {
+        // Eğer handleClose fonksiyonu bulunamazsa normal çıkış yap
+        if (isCurrentlyFullscreen()) {
+          await exitFullscreen()
+        }
+        dispatch(toggleMapFullscreen())
+      }
+    } else {
+      // Fullscreen'e girerken normal davran
+      dispatch(toggleMapFullscreen())
+    }
   }
 
   const buttonStyle = {

@@ -6,7 +6,7 @@ import { getThemeStyles } from 'map-import'
 const MapSidebar = () => {
   const { mapTheme } = useSelector((state) => state.map)
   const themeStyles = getThemeStyles(mapTheme)
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const [isCollapsed, setIsCollapsed] = useState(true)
   const [activeTab, setActiveTab] = useState('info')
   const [isToggleHovered, setIsToggleHovered] = useState(false)
 

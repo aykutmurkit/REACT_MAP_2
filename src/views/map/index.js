@@ -1,6 +1,6 @@
 import React from 'react'
 import MapPortal from './MapPortal'
-import { MapContainer, MapControls, MapSidebar, CenterMenu } from './imports'
+import { MapContainer, MapControls, MapSidebar, CenterMenu, MapLogoOverlay } from './imports'
 
 // MapSidebar'ı ekle
 const MapView = () => {
@@ -14,7 +14,8 @@ const MapView = () => {
     React.createElement(MapSidebar, { key: 'map-sidebar' }),
     React.createElement(MapContainer, { key: 'map-container' }),
     React.createElement(MapControls, { key: 'map-controls' }),
-    React.createElement(CenterMenu, { key: 'center-menu' })
+    React.createElement(CenterMenu, { key: 'center-menu' }),
+    React.createElement(MapLogoOverlay, { key: 'map-logo-overlay' })
   ])
 }
 

@@ -1,5 +1,27 @@
-// MapPortal bileşenini dışa aktarıyoruz
-export { default as MapPortal } from './MapPortal'
+import React from 'react'
+import MapPortal from './MapPortal'
+import { MapContainer, MapControls, MapSidebar } from './imports'
+
+// MapSidebar'ı ekle
+const MapView = () => {
+  return React.createElement('div', {
+    style: {
+      position: 'relative',
+      width: '100%',
+      height: '100%'
+    }
+  }, [
+    React.createElement(MapSidebar, { key: 'map-sidebar' }),
+    React.createElement(MapContainer, { key: 'map-container' }),
+    React.createElement(MapControls, { key: 'map-controls' })
+  ])
+}
+
+// Ana harita bileşenini dışa aktar
+export default MapView
+
+// MapPortal'ı da dışa aktar
+export { MapPortal }
 
 // Harita modülüyle alakalı genel stilleri de dışa aktarabiliriz
 export * from './styles/mapStyles'

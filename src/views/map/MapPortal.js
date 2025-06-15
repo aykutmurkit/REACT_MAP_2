@@ -2,8 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import ReactDOM from 'react-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleMapFullscreen, setRealFullscreen } from '../../redux/slices/mapSlice'
-import MapContainer from './components/MapContainer'
-import MapControls from './components/MapControls'
+import { MapContainer, MapControls, MapSidebar } from './imports'
 import { portalOverlayStyle, mapContainerStyle } from './styles/mapStyles'
 import { 
   isFullscreenSupported, 
@@ -102,6 +101,7 @@ const MapPortal = () => {
       onClick: (e) => e.stopPropagation() // Harita alanına tıklandığında overlay click'ini engelle
     }, [
       // Harita bileşeni
+      React.createElement(MapSidebar, { key: 'map-sidebar' }),
       React.createElement(MapContainer, { key: 'map' }),
       
       // Harita kontrolleri

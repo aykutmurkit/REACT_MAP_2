@@ -24,6 +24,7 @@ export { default as DeviceInfoButton } from './components/DeviceInfoButton'
 export { default as MapStyleToggleButton } from './components/MapStyleToggleButton'
 export { default as FpsButton } from './components/FpsButton'
 export { default as ScreenshotButton } from './components/ScreenshotButton'
+export { default as MapSidebar } from './components/MapSidebar'
 
 // Map Utils
 export * from './utils/mapUtils'

@@ -286,7 +286,12 @@ const MapContainer = () => {
   }, [isMapLoaded, canUndo, canRedo])
 
   return React.createElement('div', {
-    style: { width: '100%', height: '100%', position: 'relative' }
+    ref: mapContainer,
+    style: {
+      width: '100%',
+      height: '100%',
+      position: 'relative'
+    }
   }, [
     // Harita div'i
     React.createElement('div', {

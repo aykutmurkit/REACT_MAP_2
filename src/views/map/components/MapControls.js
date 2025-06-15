@@ -20,9 +20,11 @@ import {
   FullscreenButton,
   DeviceInfoButton,
   MapStyleToggleButton,
+  FpsButton,
   getControlPropsForDevice,
   controlsContainerStyle
 } from '../imports'
+import { ScreenshotButton } from 'map-import'
 
 const MapControls = () => {
   const { controls } = useSelector((state) => state.map)
@@ -282,6 +284,22 @@ const MapControls = () => {
       isVisible: getControlProps('themeToggle').isVisible
     }),
     
+    // Map Style Toggle Button
+    React.createElement(MapStyleToggleButton, {
+      key: 'map-style-toggle',
+      size: getControlProps('mapStyleToggle').size,
+      position: getControlProps('mapStyleToggle').position,
+      isVisible: getControlProps('mapStyleToggle').isVisible
+    }),
+    
+    // FPS Button
+    React.createElement(FpsButton, {
+      key: 'fps',
+      size: getControlProps('fps').size,
+      position: getControlProps('fps').position,
+      isVisible: getControlProps('fps').isVisible
+    }),
+    
     // Fullscreen Button
     React.createElement(FullscreenButton, {
       key: 'fullscreen',
@@ -297,13 +315,13 @@ const MapControls = () => {
       position: getControlProps('deviceInfo').position,
       isVisible: getControlProps('deviceInfo').isVisible
     }),
-    
-    // Map Style Toggle Button
-    React.createElement(MapStyleToggleButton, {
-      key: 'map-style-toggle',
-      size: getControlProps('mapStyleToggle').size,
-      position: getControlProps('mapStyleToggle').position,
-      isVisible: getControlProps('mapStyleToggle').isVisible
+
+    // Screenshot Button
+    React.createElement(ScreenshotButton, {
+      key: 'screenshot',
+      size: getControlProps('screenshot').size,
+      position: getControlProps('screenshot').position,
+      isVisible: getControlProps('screenshot').isVisible
     })
   ])
 }

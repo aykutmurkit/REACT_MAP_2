@@ -22,11 +22,14 @@ export { default as ThemeToggleButton } from './components/ThemeToggleButton'
 export { default as FullscreenButton } from './components/FullscreenButton'
 export { default as DeviceInfoButton } from './components/DeviceInfoButton'
 export { default as MapStyleToggleButton } from './components/MapStyleToggleButton'
+export { default as FpsButton } from './components/FpsButton'
+export { default as ScreenshotButton } from './components/ScreenshotButton'
 
 // Map Utils
 export * from './utils/mapUtils'
 export { DrawRectangle, DrawCircle, MeasureLine, MeasurePolygon } from './utils/customDrawModes'
 export * from './utils/themeUtils'
+export * from './utils/screenshotUtils'
 
 // Map Styles
 export * from './styles/mapControlsStyles'

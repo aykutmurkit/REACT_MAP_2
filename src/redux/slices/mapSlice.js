@@ -13,7 +13,7 @@ const initialState = {
     mobile: {
       zoomIn: {
         size: { width: 30, height: 30 },
-        position: { top: '10px', right: '10px' },
+        position: { top: '15px', right: '15px' },
         isVisible: true
       },
       zoomOut: {
@@ -108,14 +108,24 @@ const initialState = {
       },
       mapStyleToggle: {
         size: { width: 30, height: 30 },
-        position: { top: '295px', right: '45px' },
+        position: { top: '297px', right: '47px' },
+        isVisible: true
+      },
+      fps: {
+        size: { width: 65, height: 30 },
+        position: { top: '367px', right: '12px' },
+        isVisible: true
+      },
+      screenshot: {
+        size: { width: 30, height: 30 },
+        position: { top: '407px', right: '12px' },
         isVisible: true
       }
     },
     tablet: {
       zoomIn: {
         size: { width: 30, height: 30 },
-        position: { top: '12px', right: '12px' },
+        position: { top: '15px', right: '15px' },
         isVisible: true
       },
       zoomOut: {
@@ -211,6 +221,16 @@ const initialState = {
       mapStyleToggle: {
         size: { width: 30, height: 30 },
         position: { top: '297px', right: '47px' },
+        isVisible: true
+      },
+      fps: {
+        size: { width: 65, height: 30 },
+        position: { top: '367px', right: '12px' },
+        isVisible: true
+      },
+      screenshot: {
+        size: { width: 30, height: 30 },
+        position: { top: '407px', right: '12px' },
         isVisible: true
       }
     },
@@ -313,6 +333,16 @@ const initialState = {
       mapStyleToggle: {
         size: { width: 30, height: 30 },
         position: { top: '300px', right: '50px' },
+        isVisible: true
+      },
+      fps: {
+        size: { width: 65, height: 30 },
+        position: { top: '370px', right: '15px' },
+        isVisible: true
+      },
+      screenshot: {
+        size: { width: 30, height: 30 },
+        position: { top: '410px', right: '15px' },
         isVisible: true
       }
     }

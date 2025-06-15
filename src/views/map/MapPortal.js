@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import ReactDOM from 'react-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleMapFullscreen, setRealFullscreen } from '../../redux/slices/mapSlice'
-import { MapContainer, MapControls, MapSidebar } from './imports'
+import { MapContainer, MapControls, MapSidebar, CenterMenu } from './imports'
 import { portalOverlayStyle, mapContainerStyle } from './styles/mapStyles'
 import { 
   isFullscreenSupported, 
@@ -105,7 +105,8 @@ const MapPortal = () => {
       React.createElement(MapContainer, { key: 'map' }),
       
       // Harita kontrolleri
-      React.createElement(MapControls, { key: 'controls' })
+      React.createElement(MapControls, { key: 'controls' }),
+      React.createElement(CenterMenu, { key: 'center-menu' })
     ])
   ])
 

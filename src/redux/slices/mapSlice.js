@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   isMapFullscreen: false,
   isRealFullscreen: false,
-  mapCenter: [29.0, 41.0], // İstanbul koordinatları
-  mapZoom: 10,
+  mapCenter: [35.0, 39.0], // Türkiye merkez koordinatları
+  mapZoom: 6, // Türkiye genelini gösterecek zoom
   deviceType: 'desktop', // 'mobile', 'tablet', 'desktop'
   mapModeText: 'Desktop Mode', // Cihaz tipi metni
   mapTheme: 'light', // 'light', 'dark', 'auto'

@@ -1,8 +1,16 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import ibbLogo from '../assets/ibb.png'
+import { getCurrentTheme } from '../utils/themeUtils'
+import ibbLogoBlack from '../assets/ibb_logo_black_50.png'
+import ibbLogoWhite from '../assets/ibb_logo_white_50.png'
 
 const MapLogoOverlay = () => {
+  const { mapTheme } = useSelector((state) => state.map)
+
+  // Theme'e göre logo seçimi
+  const currentTheme = getCurrentTheme(mapTheme)
+  const logoSrc = currentTheme === 'dark' ? ibbLogoBlack : ibbLogoWhite
+
   const containerStyle = {
     position: 'absolute',
     bottom: 0,
@@ -13,22 +21,19 @@ const MapLogoOverlay = () => {
     zIndex: 500, // MapContainer (400) üzerinde, MapControls (1000) altında
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   }
 
   const logoStyle = {
     width: '100%',
     height: 'auto',
-    display: 'block'
+    display: 'block',
+    transition: 'opacity 0.3s ease', // Smooth theme transition
   }
 
   return (
     <div style={containerStyle}>
-      <img 
-        src={ibbLogo} 
-        alt="İBB Logo" 
-        style={logoStyle}
-      />
+      <img src={logoSrc} alt="İBB Logo" style={logoStyle} />
     </div>
   )
 }

@@ -7,22 +7,18 @@ const MeasurementDisplay = ({ measurements, onClose, onClearMeasurement }) => {
   }
 
   const measurementContainerStyle = {
-    position: 'absolute',
-    top: '20px',
-    left: '20px',
     backgroundColor: 'var(--fd-bg-light)',
     backdropFilter: 'blur(var(--fd-blur))',
     WebkitBackdropFilter: 'blur(var(--fd-blur))',
     border: '1px solid var(--fd-border)',
     borderRadius: '6px',
     boxShadow: 'var(--fd-shadow-2)',
-    padding: 'var(--fd-space-md)',
-    minWidth: '250px',
-    maxWidth: '350px',
-    zIndex: 1000,
     fontFamily: 'var(--fd-font-family)',
     fontSize: 'var(--fd-font-size-base)',
-    color: 'var(--fd-text-primary)'
+    color: 'var(--fd-text-primary)',
+    minWidth: '250px',
+    maxWidth: '350px',
+    zIndex: 1000
   }
 
   const headerStyle = {
@@ -94,63 +90,69 @@ const MeasurementDisplay = ({ measurements, onClose, onClearMeasurement }) => {
     const icon = measurement.type === 'distance' ? MdStraighten : MdSquareFoot
     const label = measurement.type === 'distance' ? 'Mesafe' : 'Alan'
     
-    return React.createElement('div', {
-      key: index,
-      style: measurementItemStyle
-    }, [
-      React.createElement(icon, {
-        key: 'icon',
-        size: 16,
-        style: iconStyle
-      }),
-      React.createElement('div', {
-        key: 'text',
-        style: measurementTextStyle
-      }, [
-        React.createElement('div', {
-          key: 'label'
-        }, label),
-        React.createElement('div', {
-          key: 'value',
-          style: valueStyle
-        }, measurement.value)
-      ])
-    ])
+    return (
+      <div key={index} className="d-flex align-items-center p-2 mb-2" style={measurementItemStyle}>
+        {React.createElement(icon, {
+          size: 16,
+          style: iconStyle,
+          className: 'me-2'
+        })}
+        <div className="flex-grow-1" style={measurementTextStyle}>
+          <div>{label}</div>
+          <div style={valueStyle}>{measurement.value}</div>
+        </div>
+      </div>
+    )
   }
 
-  return React.createElement('div', {
-    style: measurementContainerStyle
-  }, [
-    React.createElement('div', {
-      key: 'header',
-      style: headerStyle
-    }, [
-      React.createElement('h3', {
-        key: 'title',
-        style: titleStyle
-      }, 'Ölçümler'),
-      React.createElement('button', {
-        key: 'close',
-        style: closeButtonStyle,
-        onClick: onClose,
-        title: 'Kapat'
-      }, React.createElement(MdClose, { size: 18 }))
-    ]),
-    React.createElement('div', {
-      key: 'measurements'
-    }, measurements.map(renderMeasurement)),
-    React.createElement('button', {
-      key: 'clear',
-      style: clearButtonStyle,
-      onClick: onClearMeasurement,
-      onMouseEnter: (e) => {
-        e.target.style.backgroundColor = 'var(--fd-accent-hover)'
-      },
-      onMouseLeave: (e) => {
-        e.target.style.backgroundColor = 'var(--fd-accent)'
-      }
-    }, 'Ölçümleri Temizle')
-  ])
+  return (
+    <div className="position-fixed" style={{ top: '20px', left: '20px', zIndex: 1000 }}>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-12 col-sm-8 col-md-6 col-lg-4">
+            <div className="card" style={measurementContainerStyle}>
+              {/* Header */}
+              <div className="card-header d-flex justify-content-between align-items-center p-3" style={headerStyle}>
+                <h5 className="card-title mb-0" style={titleStyle}>Ölçümler</h5>
+                <button 
+                  className="btn btn-sm p-1" 
+                  style={closeButtonStyle}
+                  onClick={onClose}
+                  title="Kapat"
+                  onMouseEnter={(e) => {
+                    e.target.style.backgroundColor = 'rgba(0,0,0,0.1)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.backgroundColor = 'transparent'
+                  }}
+                >
+                  <MdClose size={18} />
+                </button>
+              </div>
+              
+              {/* Content */}
+              <div className="card-body p-3">
+                {measurements.map(renderMeasurement)}
+                <button 
+                  className="btn w-100 mt-2"
+                  style={clearButtonStyle}
+                  onClick={onClearMeasurement}
+                  onMouseEnter={(e) => {
+                    e.target.style.backgroundColor = 'var(--fd-accent-hover)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.backgroundColor = 'var(--fd-accent)'
+                  }}
+                >
+                  Ölçümleri Temizle
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default MeasurementDisplay 

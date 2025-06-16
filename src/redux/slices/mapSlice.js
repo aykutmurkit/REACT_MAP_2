@@ -12,225 +12,225 @@ const initialState = {
   controls: {
     mobile: {
       zoomIn: {
-        size: { width: 30, height: 30 },
-        position: { top: '15px', right: '15px' },
+        size: { width: 26, height: 26 },
+        position: { top: '12px', right: '12px' },
         isVisible: true
       },
       zoomOut: {
-        size: { width: 30, height: 30 },
-        position: { top: '45px', right: '10px' },
+        size: { width: 26, height: 26 },
+        position: { top: '42px', right: '12px' },
         isVisible: true
       },
       drawPolygon: {
-        size: { width: 30, height: 30 },
-        position: { top: '85px', right: '10px' },
+        size: { width: 26, height: 26 },
+        position: { top: '72px', right: '12px' },
         isVisible: true
       },
       drawLine: {
-        size: { width: 30, height: 30 },
-        position: { top: '120px', right: '10px' },
+        size: { width: 26, height: 26 },
+        position: { top: '102px', right: '12px' },
         isVisible: true
       },
       drawPoint: {
-        size: { width: 30, height: 30 },
-        position: { top: '155px', right: '10px' },
+        size: { width: 26, height: 26 },
+        position: { top: '132px', right: '12px' },
         isVisible: true
       },
       drawRectangle: {
-        size: { width: 30, height: 30 },
-        position: { top: '190px', right: '10px' },
+        size: { width: 26, height: 26 },
+        position: { top: '162px', right: '12px' },
         isVisible: true
       },
       drawCircle: {
-        size: { width: 30, height: 30 },
-        position: { top: '225px', right: '10px' },
+        size: { width: 26, height: 26 },
+        position: { top: '192px', right: '12px' },
         isVisible: true
       },
       editMode: {
-        size: { width: 30, height: 30 },
-        position: { top: '260px', right: '10px' },
+        size: { width: 26, height: 26 },
+        position: { top: '222px', right: '12px' },
         isVisible: true
       },
       selectMode: {
-        size: { width: 30, height: 30 },
-        position: { top: '295px', right: '10px' },
+        size: { width: 26, height: 26 },
+        position: { top: '252px', right: '12px' },
         isVisible: true
       },
       measureDistance: {
-        size: { width: 30, height: 30 },
-        position: { top: '10px', right: '45px' },
+        size: { width: 26, height: 26 },
+        position: { top: '12px', right: '42px' },
         isVisible: true
       },
       measureArea: {
-        size: { width: 30, height: 30 },
-        position: { top: '45px', right: '45px' },
+        size: { width: 26, height: 26 },
+        position: { top: '42px', right: '42px' },
         isVisible: false
       },
       undo: {
-        size: { width: 30, height: 30 },
-        position: { top: '85px', right: '45px' },
+        size: { width: 26, height: 26 },
+        position: { top: '72px', right: '42px' },
         isVisible: true
       },
       redo: {
-        size: { width: 30, height: 30 },
-        position: { top: '120px', right: '45px' },
+        size: { width: 26, height: 26 },
+        position: { top: '102px', right: '42px' },
         isVisible: true
       },
       save: {
-        size: { width: 30, height: 30 },
-        position: { top: '155px', right: '45px' },
+        size: { width: 26, height: 26 },
+        position: { top: '132px', right: '42px' },
         isVisible: true
       },
       export: {
-        size: { width: 30, height: 30 },
-        position: { top: '190px', right: '45px' },
+        size: { width: 26, height: 26 },
+        position: { top: '162px', right: '42px' },
         isVisible: true
       },
       trash: {
-        size: { width: 30, height: 30 },
-        position: { top: '330px', right: '10px' },
+        size: { width: 26, height: 26 },
+        position: { top: '282px', right: '12px' },
         isVisible: true
       },
       themeToggle: {
-        size: { width: 30, height: 30 },
-        position: { top: '225px', right: '45px' },
+        size: { width: 26, height: 26 },
+        position: { top: '192px', right: '42px' },
         isVisible: true
       },
       fullscreen: {
-        size: { width: 30, height: 30 },
-        position: { top: '10px', right: '80px' },
+        size: { width: 26, height: 26 },
+        position: { top: '12px', right: '72px' },
         isVisible: true
       },
       deviceInfo: {
-        size: { width: 30, height: 30 },
-        position: { top: '260px', right: '45px' },
+        size: { width: 26, height: 26 },
+        position: { top: '222px', right: '42px' },
         isVisible: true
       },
       mapStyleToggle: {
-        size: { width: 30, height: 30 },
-        position: { top: '297px', right: '47px' },
+        size: { width: 26, height: 26 },
+        position: { top: '252px', right: '42px' },
         isVisible: true
       },
       fps: {
-        size: { width: 65, height: 30 },
-        position: { top: '367px', right: '12px' },
+        size: { width: 55, height: 26 },
+        position: { top: '312px', right: '12px' },
         isVisible: true
       },
       screenshot: {
-        size: { width: 30, height: 30 },
-        position: { top: '407px', right: '12px' },
+        size: { width: 26, height: 26 },
+        position: { top: '342px', right: '12px' },
         isVisible: true
       }
     },
     tablet: {
       zoomIn: {
-        size: { width: 30, height: 30 },
+        size: { width: 28, height: 28 },
         position: { top: '15px', right: '15px' },
         isVisible: true
       },
       zoomOut: {
-        size: { width: 30, height: 30 },
-        position: { top: '47px', right: '12px' },
+        size: { width: 28, height: 28 },
+        position: { top: '47px', right: '15px' },
         isVisible: true
       },
       drawPolygon: {
-        size: { width: 30, height: 30 },
-        position: { top: '87px', right: '12px' },
+        size: { width: 28, height: 28 },
+        position: { top: '79px', right: '15px' },
         isVisible: true
       },
       drawLine: {
-        size: { width: 30, height: 30 },
-        position: { top: '122px', right: '12px' },
+        size: { width: 28, height: 28 },
+        position: { top: '111px', right: '15px' },
         isVisible: true
       },
       drawPoint: {
-        size: { width: 30, height: 30 },
-        position: { top: '157px', right: '12px' },
+        size: { width: 28, height: 28 },
+        position: { top: '143px', right: '15px' },
         isVisible: true
       },
       drawRectangle: {
-        size: { width: 30, height: 30 },
-        position: { top: '192px', right: '12px' },
+        size: { width: 28, height: 28 },
+        position: { top: '175px', right: '15px' },
         isVisible: true
       },
       drawCircle: {
-        size: { width: 30, height: 30 },
-        position: { top: '227px', right: '12px' },
+        size: { width: 28, height: 28 },
+        position: { top: '207px', right: '15px' },
         isVisible: true
       },
       editMode: {
-        size: { width: 30, height: 30 },
-        position: { top: '262px', right: '12px' },
+        size: { width: 28, height: 28 },
+        position: { top: '239px', right: '15px' },
         isVisible: true
       },
       selectMode: {
-        size: { width: 30, height: 30 },
-        position: { top: '297px', right: '12px' },
+        size: { width: 28, height: 28 },
+        position: { top: '271px', right: '15px' },
         isVisible: true
       },
       measureDistance: {
-        size: { width: 30, height: 30 },
-        position: { top: '12px', right: '47px' },
+        size: { width: 28, height: 28 },
+        position: { top: '15px', right: '47px' },
         isVisible: true
       },
       measureArea: {
-        size: { width: 30, height: 30 },
+        size: { width: 28, height: 28 },
         position: { top: '47px', right: '47px' },
         isVisible: false
       },
       undo: {
-        size: { width: 30, height: 30 },
-        position: { top: '87px', right: '47px' },
+        size: { width: 28, height: 28 },
+        position: { top: '79px', right: '47px' },
         isVisible: true
       },
       redo: {
-        size: { width: 30, height: 30 },
-        position: { top: '122px', right: '47px' },
+        size: { width: 28, height: 28 },
+        position: { top: '111px', right: '47px' },
         isVisible: true
       },
       save: {
-        size: { width: 30, height: 30 },
-        position: { top: '157px', right: '47px' },
+        size: { width: 28, height: 28 },
+        position: { top: '143px', right: '47px' },
         isVisible: true
       },
       export: {
-        size: { width: 30, height: 30 },
-        position: { top: '192px', right: '47px' },
+        size: { width: 28, height: 28 },
+        position: { top: '175px', right: '47px' },
         isVisible: true
       },
       trash: {
-        size: { width: 30, height: 30 },
-        position: { top: '332px', right: '12px' },
+        size: { width: 28, height: 28 },
+        position: { top: '303px', right: '15px' },
         isVisible: true
       },
       themeToggle: {
-        size: { width: 30, height: 30 },
-        position: { top: '227px', right: '47px' },
+        size: { width: 28, height: 28 },
+        position: { top: '207px', right: '47px' },
         isVisible: true
       },
       fullscreen: {
-        size: { width: 30, height: 30 },
-        position: { top: '12px', right: '82px' },
+        size: { width: 28, height: 28 },
+        position: { top: '15px', right: '79px' },
         isVisible: true
       },
       deviceInfo: {
-        size: { width: 30, height: 30 },
-        position: { top: '262px', right: '47px' },
+        size: { width: 28, height: 28 },
+        position: { top: '239px', right: '47px' },
         isVisible: true
       },
       mapStyleToggle: {
-        size: { width: 30, height: 30 },
-        position: { top: '297px', right: '47px' },
+        size: { width: 28, height: 28 },
+        position: { top: '271px', right: '47px' },
         isVisible: true
       },
       fps: {
-        size: { width: 65, height: 30 },
-        position: { top: '367px', right: '12px' },
+        size: { width: 60, height: 28 },
+        position: { top: '335px', right: '15px' },
         isVisible: true
       },
       screenshot: {
-        size: { width: 30, height: 30 },
-        position: { top: '407px', right: '12px' },
+        size: { width: 28, height: 28 },
+        position: { top: '367px', right: '15px' },
         isVisible: true
       }
     },
@@ -247,37 +247,37 @@ const initialState = {
       },
       drawPolygon: {
         size: { width: 30, height: 30 },
-        position: { top: '90px', right: '15px' },
+        position: { top: '85px', right: '15px' },
         isVisible: true
       },
       drawLine: {
         size: { width: 30, height: 30 },
-        position: { top: '125px', right: '15px' },
+        position: { top: '120px', right: '15px' },
         isVisible: true
       },
       drawPoint: {
         size: { width: 30, height: 30 },
-        position: { top: '160px', right: '15px' },
+        position: { top: '155px', right: '15px' },
         isVisible: true
       },
       drawRectangle: {
         size: { width: 30, height: 30 },
-        position: { top: '195px', right: '15px' },
+        position: { top: '190px', right: '15px' },
         isVisible: true
       },
       drawCircle: {
         size: { width: 30, height: 30 },
-        position: { top: '230px', right: '15px' },
+        position: { top: '225px', right: '15px' },
         isVisible: true
       },
       editMode: {
         size: { width: 30, height: 30 },
-        position: { top: '265px', right: '15px' },
+        position: { top: '260px', right: '15px' },
         isVisible: true
       },
       selectMode: {
         size: { width: 30, height: 30 },
-        position: { top: '300px', right: '15px' },
+        position: { top: '295px', right: '15px' },
         isVisible: true
       },
       measureDistance: {
@@ -292,32 +292,32 @@ const initialState = {
       },
       undo: {
         size: { width: 30, height: 30 },
-        position: { top: '90px', right: '50px' },
+        position: { top: '85px', right: '50px' },
         isVisible: true
       },
       redo: {
         size: { width: 30, height: 30 },
-        position: { top: '125px', right: '50px' },
+        position: { top: '120px', right: '50px' },
         isVisible: true
       },
       save: {
         size: { width: 30, height: 30 },
-        position: { top: '160px', right: '50px' },
+        position: { top: '155px', right: '50px' },
         isVisible: true
       },
       export: {
         size: { width: 30, height: 30 },
-        position: { top: '195px', right: '50px' },
+        position: { top: '190px', right: '50px' },
         isVisible: true
       },
       trash: {
         size: { width: 30, height: 30 },
-        position: { top: '335px', right: '15px' },
+        position: { top: '330px', right: '15px' },
         isVisible: true
       },
       themeToggle: {
         size: { width: 30, height: 30 },
-        position: { top: '230px', right: '50px' },
+        position: { top: '225px', right: '50px' },
         isVisible: true
       },
       fullscreen: {
@@ -327,22 +327,22 @@ const initialState = {
       },
       deviceInfo: {
         size: { width: 30, height: 30 },
-        position: { top: '265px', right: '50px' },
+        position: { top: '260px', right: '50px' },
         isVisible: true
       },
       mapStyleToggle: {
         size: { width: 30, height: 30 },
-        position: { top: '300px', right: '50px' },
+        position: { top: '295px', right: '50px' },
         isVisible: true
       },
       fps: {
         size: { width: 65, height: 30 },
-        position: { top: '370px', right: '15px' },
+        position: { top: '365px', right: '15px' },
         isVisible: true
       },
       screenshot: {
         size: { width: 30, height: 30 },
-        position: { top: '410px', right: '15px' },
+        position: { top: '400px', right: '15px' },
         isVisible: true
       }
     }

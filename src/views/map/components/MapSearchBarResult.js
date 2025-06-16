@@ -68,18 +68,13 @@ const MapSearchBarResult = ({ results, onResultClick, visible, width, iconColor,
   }
 
   const containerStyle = {
-    position: 'absolute',
-    bottom: 154, // SearchBar bottom (96) + SearchBar height (56) + gap (2)
-    left: '50%',
-    transform: 'translateX(-50%)',
-    width: width || '400px',
     maxHeight: 300,
     backgroundColor: themeStyles.baseButtonStyle.backgroundColor,
     borderRadius: 8,
     boxShadow: '0 2px 10px rgba(0,0,0,0.15)',
-    zIndex: 1090,
     overflow: 'hidden',
     border: `1px solid ${themeStyles.baseButtonStyle.border.split(' ')[2]}`,
+    zIndex: 1090
   }
 
   const listStyle = {
@@ -130,34 +125,43 @@ const MapSearchBarResult = ({ results, onResultClick, visible, width, iconColor,
   }
 
   return (
-    <div style={containerStyle}>
-      <ul style={listStyle}>
-        {results.map((result) => (
-          <li
-            key={result.id}
-            style={listItemStyle}
-            onClick={() => onResultClick(result)}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = themeStyles.buttonHoverStyle.backgroundColor || '#f5f5f5'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'transparent'
-            }}
-          >
-            <div style={iconStyle}>
-              {getIconForType(result.type)}
+    <div className="position-fixed bottom-0 start-50 translate-middle-x" style={{ bottom: '130px', zIndex: 1090 }}>
+      <div className="container-fluid">
+        <div className="row justify-content-center">
+          <div className="col-auto">
+            <div className="card" style={containerStyle}>
+              <ul className="list-unstyled m-0" style={listStyle}>
+                {results.map((result) => (
+                  <li
+                    key={result.id}
+                    className="d-flex align-items-center p-3 border-bottom"
+                    style={{ cursor: 'pointer', transition: 'background-color 0.2s' }}
+                    onClick={() => onResultClick(result)}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = themeStyles.buttonHoverStyle.backgroundColor || '#f5f5f5'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent'
+                    }}
+                  >
+                    <div className="me-3" style={iconStyle}>
+                      {getIconForType(result.type)}
+                    </div>
+                    <div className="flex-grow-1" style={textContainerStyle}>
+                      <div style={primaryTextStyle}>
+                        {result.address?.road || result.address?.suburb || result.address?.city || result.name.split(',')[0]}
+                      </div>
+                      <div style={secondaryTextStyle}>
+                        {formatDisplayAddress(result)}
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div style={textContainerStyle}>
-              <div style={primaryTextStyle}>
-                {result.address?.road || result.address?.suburb || result.address?.city || result.name.split(',')[0]}
-              </div>
-              <div style={secondaryTextStyle}>
-                {formatDisplayAddress(result)}
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

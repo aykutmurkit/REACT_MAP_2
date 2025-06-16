@@ -32,6 +32,7 @@ export { default as MapIntroOverlay } from './components/MapIntroOverlay'
 export { default as MapOutroOverlay } from './components/MapOutroOverlay'
 export { default as MapSearchBar } from './components/MapSearchBar'
 export { default as MapSearchBarResult } from './components/MapSearchBarResult'
+export { default as MapManagement } from './components/MapManagement'
 
 // Map Utils
 export * from './utils/mapUtils'

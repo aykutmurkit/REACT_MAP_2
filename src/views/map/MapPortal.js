@@ -5,11 +5,11 @@ import { toggleMapFullscreen, setRealFullscreen } from '../../redux/slices/mapSl
 import { 
   MapContainer, 
   MapControls, 
-  MapSidebar, 
   CenterMenu, 
   MapLogoOverlay, 
   MapIntroOverlay,
-  MapOutroOverlay 
+  MapOutroOverlay,
+  MapManagement 
 } from './imports'
 import { portalOverlayStyle, mapContainerStyle } from './styles/mapStyles'
 import { 
@@ -159,13 +159,15 @@ const MapPortal = () => {
       onClick: (e) => e.stopPropagation() // Harita alanına tıklandığında overlay click'ini engelle
     }, [
       // Harita bileşeni
-      React.createElement(MapSidebar, { key: 'map-sidebar' }),
       React.createElement(MapContainer, { key: 'map' }),
       
       // Harita kontrolleri
       React.createElement(MapControls, { key: 'controls' }),
       React.createElement(CenterMenu, { key: 'center-menu' }),
-      React.createElement(MapLogoOverlay, { key: 'map-logo-overlay' })
+      React.createElement(MapLogoOverlay, { key: 'map-logo-overlay' }),
+      
+      // Map Management Panel (overlay)
+      React.createElement(MapManagement, { key: 'map-management' })
     ])
   ])
 

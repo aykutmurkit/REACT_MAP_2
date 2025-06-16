@@ -93,23 +93,15 @@ const MapSearchBar = ({ width, onClose, backgroundColor, borderRadius }) => {
   }
 
   const containerStyle = {
-    position: 'absolute',
-    bottom: 86, // CenterMenu yüksekliği (56) + gap (20) + 20px
-    left: '50%',
-    transform: `translateX(-50%) translateY(${visible ? '0' : '-20px'})`,
-    width: width || 400,
-    height: `${CONTAINER_HEIGHT}px`,
     background: backgroundColor || 'rgba(255,255,255,0.95)',
     borderRadius: borderRadius || 8,
     boxShadow: '0 2px 10px rgba(0,0,0,0.15)',
-    display: 'flex',
-    alignItems: 'center',
-    zIndex: 1100,
     border: '1px solid #e0e0e0',
+    height: `${CONTAINER_HEIGHT}px`,
     opacity: visible ? 1 : 0,
+    transform: `translateY(${visible ? '0' : '-20px'})`,
     transition: 'opacity 0.2s, transform 0.2s',
-    padding: 0,
-    gap: 0,
+    zIndex: 1100
   }
 
   const inputStyle = {
@@ -155,30 +147,43 @@ const MapSearchBar = ({ width, onClose, backgroundColor, borderRadius }) => {
 
   return (
     <>
-      <div style={containerStyle}>
-        {isSearching ? (
-          <div style={loadingIndicatorStyle} />
-        ) : (
-          <MdSearch style={searchIconStyle} />
-        )}
-        <input
-          ref={inputRef}
-          type="text"
-          placeholder="Haritada ara..."
-          style={inputStyle}
-          className="map-search-bar-input"
-          value={query}
-          onChange={(e) => handleSearch(e.target.value)}
-        />
-        <button style={closeBtnStyle} onClick={handleClose} title="Kapat">
-          <MdClose />
-        </button>
+      <div className="position-fixed bottom-0 start-50 translate-middle-x mb-5" style={{ zIndex: 1100 }}>
+        <div className="container-fluid">
+          <div className="row justify-content-center">
+            <div className="col-auto">
+              <div className="d-flex align-items-center" style={containerStyle}>
+                {isSearching ? (
+                  <div style={loadingIndicatorStyle} className="ms-3" />
+                ) : (
+                  <MdSearch style={searchIconStyle} className="ms-3" />
+                )}
+                <input
+                  ref={inputRef}
+                  type="text"
+                  placeholder="Haritada ara..."
+                  style={inputStyle}
+                  className="map-search-bar-input flex-grow-1"
+                  value={query}
+                  onChange={(e) => handleSearch(e.target.value)}
+                />
+                <button 
+                  className="btn btn-sm me-2" 
+                  style={closeBtnStyle} 
+                  onClick={handleClose} 
+                  title="Kapat"
+                >
+                  <MdClose />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <MapSearchBarResult 
         results={results}
         onResultClick={handleResultClick}
         visible={showResults && results.length > 0}
-        width={width}
+        width="auto"
         iconColor={mainColor}
         textColor={mainColor}
       />

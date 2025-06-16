@@ -8,9 +8,30 @@ import { DrawRectangle, DrawCircle, MeasureLine, MeasurePolygon } from '../utils
 import MeasurementDisplay from './MeasurementDisplay'
 import { mapDivStyle, mapInfoTextStyle } from '../styles/mapStyles'
 
+// Harita stili URL mapping'i
+const MAP_STYLE_URLS = {
+  // OpenStreetMap styles
+  openstreet: 'https://demotiles.maplibre.org/style.json',
+  openTopoMap: 'https://api.maptiler.com/maps/openstreetmap/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL',
+  alidadeSmooth: 'https://tiles.stadiamaps.com/styles/alidade_smooth.json',
+  
+  // Carto styles (ücretsiz)
+  cartoLight: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+  cartoDark: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
+  cartoVoyager: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
+  
+  // Mapbox styles (demo stilleri)
+  mapboxStreets: 'https://demotiles.maplibre.org/style.json',
+  mapboxSatellite: 'https://api.maptiler.com/maps/satellite/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL',
+  mapboxOutdoors: 'https://api.maptiler.com/maps/outdoor/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL',
+  
+  // Fallback
+  default: 'https://demotiles.maplibre.org/style.json'
+}
+
 const MapContainer = () => {
   const dispatch = useDispatch()
-  const { mapCenter, mapZoom, mapModeText, mapTheme } = useSelector(state => state.map)
+  const { mapCenter, mapZoom, mapModeText, mapTheme, mapStyle } = useSelector(state => state.map)
   const mapContainer = useRef(null)
   const map = useRef(null)
   const draw = useRef(null)
@@ -24,10 +45,13 @@ const MapContainer = () => {
   useEffect(() => {
     if (map.current) return // Harita zaten başlatılmışsa çık
 
-    // MapLibre GL haritasını başlat - SABİT STİL (theme değişmez)
+    // İlk harita stilini belirle
+    const initialStyleUrl = MAP_STYLE_URLS[mapStyle] || MAP_STYLE_URLS.default
+
+    // MapLibre GL haritasını başlat
     map.current = new maplibregl.Map({
       container: mapContainer.current,
-      style: 'https://demotiles.maplibre.org/style.json', // Sabit açık tema
+      style: initialStyleUrl,
       center: mapCenter,
       zoom: mapZoom,
       antialias: true,
@@ -109,6 +133,22 @@ const MapContainer = () => {
     }
   }, [])
 
+  // MapStyle değişikliklerini dinle ve harita stilini güncelle
+  useEffect(() => {
+    if (map.current && isMapLoaded) {
+      const styleUrl = MAP_STYLE_URLS[mapStyle] || MAP_STYLE_URLS.default
+      console.log(`Harita stili değiştiriliyor: ${mapStyle} -> ${styleUrl}`)
+      
+      try {
+        map.current.setStyle(styleUrl)
+      } catch (error) {
+        console.error('Harita stili değiştirilemedi:', error)
+        // Fallback olarak default stili kullan
+        map.current.setStyle(MAP_STYLE_URLS.default)
+      }
+    }
+  }, [mapStyle, isMapLoaded])
+
   // Çizim değişikliklerini işle
   const handleDrawChange = () => {
     if (draw.current) {
@@ -160,9 +200,6 @@ const MapContainer = () => {
     const featureIds = features.map(f => f.id)
     setMeasurements(prev => prev.filter(m => !featureIds.includes(m.id)))
   }
-
-  // Theme değişikliklerini dinle - SADECE BUTONLAR İÇİN
-  // Harita stili değişmez, sadece buton theme'leri değişir
 
   // Ekran boyutu değişikliklerini dinle
   useEffect(() => {
@@ -259,6 +296,13 @@ const MapContainer = () => {
     }
   }
 
+  const changeMapStyle = (styleUrl) => {
+    if (map.current) {
+      map.current.setStyle(styleUrl)
+      console.log('Harita stili değiştirildi:', styleUrl)
+    }
+  }
+
   // Kontrol fonksiyonlarını global olarak erişilebilir yap
   useEffect(() => {
     console.log('Setting up window.mapControls, isMapLoaded:', isMapLoaded)
@@ -269,24 +313,24 @@ const MapContainer = () => {
         zoomOut,
         changeDrawMode,
         deleteAll,
-      undo,
-      redo,
-      saveDrawing,
-      exportDrawing,
-      measureDistance,
-      measureArea,
+        undo,
+        redo,
+        saveDrawing,
+        exportDrawing,
+        measureDistance,
+        measureArea,
+        changeMapStyle,
         getMap: () => map.current,
-      getDraw: () => draw.current,
-      getCanUndo: () => canUndo,
-      getCanRedo: () => canRedo,
-      isMapLoaded: () => isMapLoaded
-    }
+        getDraw: () => draw.current,
+        getCanUndo: () => canUndo,
+        getCanRedo: () => canRedo,
+        isMapLoaded: () => isMapLoaded
+      }
     
     console.log('window.mapControls set:', window.mapControls)
   }, [isMapLoaded, canUndo, canRedo])
 
   return React.createElement('div', {
-    ref: mapContainer,
     style: {
       width: '100%',
       height: '100%',

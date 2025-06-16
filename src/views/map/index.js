@@ -1,8 +1,7 @@
 import React from 'react'
 import MapPortal from './MapPortal'
-import { MapContainer, MapControls, MapSidebar, CenterMenu, MapLogoOverlay } from './imports'
+import { MapContainer, MapControls, CenterMenu, MapLogoOverlay } from './imports'
 
-// MapSidebar'ı ekle
 const MapView = () => {
   return React.createElement('div', {
     style: {
@@ -11,7 +10,6 @@ const MapView = () => {
       height: '100%'
     }
   }, [
-    React.createElement(MapSidebar, { key: 'map-sidebar' }),
     React.createElement(MapContainer, { key: 'map-container' }),
     React.createElement(MapControls, { key: 'map-controls' }),
     React.createElement(CenterMenu, { key: 'center-menu' }),

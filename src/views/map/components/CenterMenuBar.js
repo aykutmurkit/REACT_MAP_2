@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { getThemeStyles } from 'map-import'
+import { getZIndex } from '../utils/zIndexLayers'
 import {
   MdMap,
   MdLayers,
@@ -33,46 +34,23 @@ import {
   MdRoute
 } from 'react-icons/md'
 
-const BUTTON_GAP = 12
-const BUTTONS_PER_ROW = 4
-
 const CenterMenuBar = ({ isVisible, onClose, width }) => {
   const { mapTheme } = useSelector((state) => state.map)
   const themeStyles = getThemeStyles(mapTheme)
 
   if (!isVisible) return null
 
-  // Menü bar stili
+  // Bootstrap 5 responsive menu bar
   const menuBarStyle = {
-    position: 'absolute',
-    bottom: '96px',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    width: width,
     backgroundColor: themeStyles.baseButtonStyle.backgroundColor,
     borderRadius: '8px',
     boxShadow: '0 2px 10px rgba(0,0,0,0.15)',
-    zIndex: 1000,
     border: `1px solid ${themeStyles.baseButtonStyle.border.split(' ')[2]}`,
-    padding: '12px',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: `${BUTTON_GAP}px`
+    zIndex: getZIndex('CENTER_MENU_BAR')
   }
 
   const headerStyle = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     borderBottom: `1px solid ${themeStyles.baseButtonStyle.border.split(' ')[2]}`,
-    paddingBottom: '8px',
-    marginBottom: '8px'
-  }
-
-  const titleStyle = {
-    margin: 0,
-    fontSize: '16px',
-    fontWeight: 'bold',
     color: themeStyles.baseButtonStyle.color
   }
 
@@ -82,42 +60,29 @@ const CenterMenuBar = ({ isVisible, onClose, width }) => {
     cursor: 'pointer',
     color: themeStyles.baseButtonStyle.color,
     padding: '4px',
-    borderRadius: '4px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-
-  const buttonGridStyle = {
-    display: 'grid',
-    gridTemplateColumns: `repeat(${BUTTONS_PER_ROW}, 1fr)`,
-    gap: `${BUTTON_GAP}px`,
-    padding: '4px'
+    borderRadius: '4px'
   }
 
   const buttonStyle = {
-    width: '100%',
-    aspectRatio: '1',
     borderRadius: '8px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
     cursor: 'pointer',
     transition: 'all 0.2s',
     backgroundColor: themeStyles.baseButtonStyle.backgroundColor,
     color: themeStyles.baseButtonStyle.color,
     border: themeStyles.baseButtonStyle.border,
-    padding: '8px',
-    gap: '4px'
+    aspectRatio: '1',
+    minHeight: 'clamp(50px, 12vw, 70px)',
+    WebkitTapHighlightColor: 'transparent',
+    WebkitUserSelect: 'none',
+    userSelect: 'none'
   }
 
   const buttonTextStyle = {
-    fontSize: '12px',
-    textAlign: 'center',
-    margin: 0,
-    lineHeight: 1.2,
-    color: themeStyles.baseButtonStyle.color
+    fontSize: 'clamp(9px, 2vw, 11px)',
+    color: themeStyles.baseButtonStyle.color,
+    marginTop: '2px',
+    WebkitUserSelect: 'none',
+    userSelect: 'none'
   }
 
   const menuItems = [
@@ -144,25 +109,68 @@ const CenterMenuBar = ({ isVisible, onClose, width }) => {
   ]
 
   return (
-    <div style={menuBarStyle}>
-      <div style={headerStyle}>
-        <h3 style={titleStyle}>Menü</h3>
-        <button style={closeButtonStyle} onClick={onClose} title="Kapat">
-          <MdClose size={20} />
-        </button>
-      </div>
-      <div style={buttonGridStyle}>
-        {menuItems.map((item, index) => (
-          <button 
-            key={index} 
-            style={buttonStyle}
-            onClick={item.onClick}
-            title={item.title}
-          >
-            <item.icon size={32} />
-            <span style={buttonTextStyle}>{item.title}</span>
-          </button>
-        ))}
+    <div className="position-fixed bottom-0 start-50 translate-middle-x mb-4 mb-sm-5" style={{ zIndex: getZIndex('CENTER_MENU_BAR') }}>
+      <div className="container-fluid">
+        <div className="row justify-content-center">
+          <div className="col-12 col-sm-10 col-md-8 col-lg-6">
+            <div className="card" style={menuBarStyle}>
+              {/* Header */}
+              <div className="card-header d-flex justify-content-between align-items-center p-2 p-sm-3" style={headerStyle}>
+                <h5 
+                  className="card-title mb-0 fw-bold" 
+                  style={{ fontSize: 'clamp(14px, 3vw, 18px)' }}
+                >
+                  Menü
+                </h5>
+                <button 
+                  className="btn btn-sm" 
+                  style={closeButtonStyle} 
+                  onClick={onClose} 
+                  title="Kapat"
+                  onMouseEnter={(e) => {
+                    e.target.style.backgroundColor = 'rgba(0,0,0,0.1)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.backgroundColor = 'transparent'
+                  }}
+                >
+                  <MdClose style={{ fontSize: 'clamp(16px, 4vw, 20px)' }} />
+                </button>
+              </div>
+              
+              {/* Grid Content */}
+              <div className="card-body p-2 p-sm-3">
+                <div className="row g-1 g-sm-2">
+                  {menuItems.map((item, index) => (
+                    <div key={index} className="col-6 col-sm-4 col-md-3">
+                      <button 
+                        className="btn w-100 d-flex flex-column align-items-center justify-content-center p-1 p-sm-2"
+                        style={buttonStyle}
+                        onClick={item.onClick}
+                        title={item.title}
+                        onMouseEnter={(e) => {
+                          e.target.style.backgroundColor = themeStyles.buttonHoverStyle?.backgroundColor || '#f0f0f0'
+                          e.target.style.color = themeStyles.buttonHoverStyle?.color || '#0078d4'
+                          e.target.style.transform = 'translateY(-2px)'
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.backgroundColor = themeStyles.baseButtonStyle.backgroundColor
+                          e.target.style.color = themeStyles.baseButtonStyle.color
+                          e.target.style.transform = 'translateY(0)'
+                        }}
+                      >
+                        <item.icon style={{ fontSize: 'clamp(20px, 5vw, 28px)' }} />
+                        <small className="text-center mt-1" style={buttonTextStyle}>
+                          {item.title}
+                        </small>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )

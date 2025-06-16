@@ -12,6 +12,7 @@ import {
   CCardBody,
   CCardFooter,
   CCardHeader,
+  CCardImage,
   CCol,
   CProgress,
   CRow,
@@ -52,13 +53,13 @@ import avatar3 from 'src/assets/images/avatars/3.jpg'
 import avatar4 from 'src/assets/images/avatars/4.jpg'
 import avatar5 from 'src/assets/images/avatars/5.jpg'
 import avatar6 from 'src/assets/images/avatars/6.jpg'
+import isbakMapImage from 'src/views/map/assets/isbakmap.png'
 
 import WidgetsBrand from '../widgets/WidgetsBrand'
 import WidgetsDropdown from '../widgets/WidgetsDropdown'
 import MainChart from './MainChart'
 import { MapPortal } from '../map'
 import { toggleMapFullscreen } from '../../redux/slices/mapSlice'
-import { dashboardCardStyle, dashboardCardHoverStyle, dashboardCardTitleStyle, dashboardCardDescriptionStyle, dashboardCardIconStyle } from '../map/styles/mapStyles'
 
 const Dashboard = () => {
   const { t } = useTranslation()
@@ -330,30 +331,45 @@ const Dashboard = () => {
       </CCard>
       <WidgetsBrand className="mb-4" withCharts />
       
-      {/* Harita Kartı */}
+      {/* İSBAK Harita Kartı */}
       <CRow className="mb-4">
         <CCol xs={12} md={6} lg={4}>
-          <div 
-            style={dashboardCardStyle}
+          <CCard
+            className="h-100"
+            style={{ cursor: 'pointer', transition: 'transform 0.2s, box-shadow 0.2s' }}
             onClick={handleMapCardClick}
             onMouseEnter={(e) => {
-              Object.assign(e.target.style, dashboardCardHoverStyle)
+              e.currentTarget.style.transform = 'translateY(-2px)'
+              e.currentTarget.style.boxShadow = '0 4px 25px rgba(0,0,0,0.15)'
             }}
             onMouseLeave={(e) => {
-              Object.assign(e.target.style, dashboardCardStyle)
+              e.currentTarget.style.transform = 'translateY(0)'
+              e.currentTarget.style.boxShadow = ''
             }}
           >
-            <div style={dashboardCardIconStyle}>
-              <RiMapLine />
-            </div>
-            <div style={dashboardCardTitleStyle}>
-              İnteraktif Harita
-            </div>
-            <div style={dashboardCardDescriptionStyle}>
-              MapLibre GL JS ile güçlendirilmiş tam ekran harita deneyimi. 
-              Çizim araçları, zoom kontrolleri ve duyarlı tasarım.
-            </div>
-          </div>
+            <CCardImage
+              orientation="top"
+              src={isbakMapImage}
+              alt="İSBAK Harita"
+              style={{
+                height: '200px',
+                objectFit: 'cover',
+                borderBottom: '1px solid rgba(0,0,0,0.125)',
+              }}
+            />
+            <CCardHeader className="d-flex align-items-center">
+              <RiMapLine className="me-2" size={24} style={{ color: '#0078D4' }} />
+              <strong>İnteraktif Harita</strong>
+            </CCardHeader>
+            <CCardBody>
+              <p className="text-muted mb-0">
+                MapLibre GL JS ile güçlendirilmiş tam ekran harita deneyimi. Çizim araçları, zoom kontrolleri ve duyarlı tasarım.
+              </p>
+            </CCardBody>
+            <CCardFooter className="text-muted">
+              <small>Tam ekran görünüm için tıklayın</small>
+            </CCardFooter>
+          </CCard>
         </CCol>
       </CRow>
       

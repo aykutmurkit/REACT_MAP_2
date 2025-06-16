@@ -30,12 +30,15 @@ export { default as CenterMenuBar } from './components/CenterMenuBar'
 export { default as MapLogoOverlay } from './components/MapLogoOverlay'
 export { default as MapIntroOverlay } from './components/MapIntroOverlay'
 export { default as MapOutroOverlay } from './components/MapOutroOverlay'
+export { default as MapSearchBar } from './components/MapSearchBar'
+export { default as MapSearchBarResult } from './components/MapSearchBarResult'
 
 // Map Utils
 export * from './utils/mapUtils'
 export { DrawRectangle, DrawCircle, MeasureLine, MeasurePolygon } from './utils/customDrawModes'
 export * from './utils/themeUtils'
 export * from './utils/screenshotUtils'
+export { default as nominatimService } from './utils/nominatimService'
 
 // Map Styles
 export * from './styles/mapControlsStyles'

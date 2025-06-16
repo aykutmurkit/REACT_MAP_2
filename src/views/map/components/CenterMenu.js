@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { getThemeStyles } from 'map-import'
-import { MdApps, MdMap, MdLayers, MdPlace, MdNavigation, MdTerrain, MdSatellite, MdLocationCity, MdDirections } from 'react-icons/md'
+import { MdApps, MdMap, MdLayers, MdPlace, MdNavigation, MdTerrain, MdSatellite, MdLocationCity, MdDirections, MdSearch } from 'react-icons/md'
 import CenterMenuBar from './CenterMenuBar'
+import MapSearchBar from './MapSearchBar'
 
 const BUTTON_SIZE = 40
 const BUTTON_GAP = 8
@@ -15,6 +16,7 @@ const CenterMenu = () => {
   const themeStyles = getThemeStyles(mapTheme)
   const [hoveredButton, setHoveredButton] = useState(null)
   const [isMenuBarVisible, setIsMenuBarVisible] = useState(false)
+  const [showSearchBar, setShowSearchBar] = useState(false)
 
   // Menü konteyner stili
   const menuContainerStyle = {
@@ -90,7 +92,7 @@ const CenterMenu = () => {
     { id: 'navigation', icon: MdNavigation, title: 'Navigasyon', onClick: () => console.log('Navigasyon') },
     { id: 'terrain', icon: MdTerrain, title: 'Arazi', onClick: () => console.log('Arazi') },
     { id: 'satellite', icon: MdSatellite, title: 'Uydu', onClick: () => console.log('Uydu') },
-    { id: 'city', icon: MdLocationCity, title: 'Şehirler', onClick: () => console.log('Şehirler') }
+    { id: 'search', icon: MdSearch, title: 'Arama', onClick: () => setShowSearchBar(true) }
   ]
 
   return (
@@ -100,6 +102,14 @@ const CenterMenu = () => {
         onClose={() => setIsMenuBarVisible(false)} 
         width={`${CONTAINER_WIDTH}px`}
       />
+      {showSearchBar && (
+        <MapSearchBar 
+          width={`${CONTAINER_WIDTH}px`} 
+          onClose={() => setShowSearchBar(false)} 
+          backgroundColor={themeStyles.baseButtonStyle.backgroundColor}
+          borderRadius={menuContainerStyle.borderRadius}
+        />
+      )}
       <div style={menuContainerStyle}>
         {buttons.slice(0, 8).map(button => (
           <button

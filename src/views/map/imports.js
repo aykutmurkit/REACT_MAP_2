@@ -25,7 +25,7 @@ export { default as MapStyleToggleButton } from './components/MapStyleToggleButt
 export { default as FpsButton } from './components/FpsButton'
 export { default as ScreenshotButton } from './components/ScreenshotButton'
 export { default as MapSidebar } from './components/MapSidebar'
-export { default as CenterMenu } from './components/CenterMenu'
+export { CenterMenu } from './menu'
 export { default as CenterMenuBar } from './components/CenterMenuBar'
 export { default as MapLogoOverlay } from './components/MapLogoOverlay'
 export { default as MapIntroOverlay } from './components/MapIntroOverlay'
